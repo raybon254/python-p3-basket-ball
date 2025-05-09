@@ -1,3 +1,5 @@
+from itertools import chain
+
 def game_dict():
     return {
         "home": {
@@ -182,3 +184,106 @@ def game_dict():
             ]
         }
     }
+
+
+# points per game
+def num_points_per_game(player):
+    home_player = game_dict()['home']['players']
+    away_player = game_dict()['away']['players']
+
+    for member in chain(home_player, away_player):
+         if player == member['name']:
+             return member['points_per_game']
+         
+# print(num_points_per_game('Bradley Beal'))
+
+# PLayer age
+def player_age(player):
+    home_player = game_dict()['home']['players']
+    away_player = game_dict()['away']['players']
+
+    for member in chain(home_player, away_player):
+         if player == member['name']:
+             return member['age']
+         
+# print (player_age("Bradley Beal"))
+
+# Team colors
+def team_colors(team):
+    home_team = game_dict()['home']
+    away_team = game_dict()['away']
+
+    if team == home_team['team_name']:
+        return home_team['colors']
+    elif team == away_team['team_name']:
+        return away_team['colors']
+
+# print(team_colors('Washington Wizards'))
+
+# Team names
+def team_names():
+    home_player = game_dict()['home']['players']
+    away_player = game_dict()['away']['players']
+
+    home_list = []
+    away_list = []
+    for names in home_player:
+        home_list.append(names['name'])
+    
+    for names in away_player:
+        away_list.append(names['name'])
+    
+    return {"Home":home_list,"Away":away_list}
+
+# print(team_names())
+
+# Player numbers
+def player_numbers(team):
+    home_players = game_dict()['home']['players']
+    away_players = game_dict()['away']['players']
+    homeplay = game_dict()['home']['team_name']
+    awayplay = game_dict()['away']['team_name']
+
+    numbers = []
+    if team == homeplay:
+        for num in home_players:
+            numbers.append(num['number'])
+    
+    elif team == awayplay:
+        for num in away_players:
+            numbers.append(num['number'])
+
+    return numbers
+    
+
+# print(player_numbers('Washington Wizards'))
+
+# Player stats
+def player_stats(name):
+    home_player = game_dict()['home']['players']
+    away_player = game_dict()['away']['players']
+
+    for member in chain(home_player,away_player):
+        if name == member['name']:
+            return member
+
+# print(player_stats("Darius Garland"))
+
+# Average shoe rebounds
+def average_rebounds_by_shoe_brand():
+    home_player = game_dict()['home']['players']
+    away_player = game_dict()['away']['players']
+
+    brand = []
+    for b in  chain(home_player,away_player):
+        brand.append(b['shoe_brand'])
+        print(brand)
+
+    # m = 0
+    # for p in brand:
+    #     if shoe in home_player:
+    #         if  p == shoe['shoe_brand']:
+    #             m = m + shoe['rebounds_per_game']
+    #             # print(m)
+    
+print(average_rebounds_by_shoe_brand())
