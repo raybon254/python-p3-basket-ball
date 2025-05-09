@@ -277,13 +277,10 @@ def average_rebounds_by_shoe_brand():
     brand = []
     for b in  chain(home_player,away_player):
         brand.append(b['shoe_brand'])
-        print(brand)
 
-    # m = 0
-    # for p in brand:
-    #     if shoe in home_player:
-    #         if  p == shoe['shoe_brand']:
-    #             m = m + shoe['rebounds_per_game']
-    #             # print(m)
+    for p in set(brand):
+        rebounds = sum(shoe['rebounds_per_game'] for shoe in chain(home_player, away_player) if shoe['shoe_brand'] == p)
+        print(f"{p}: {rebounds:.2f}")
+    
     
 print(average_rebounds_by_shoe_brand())
